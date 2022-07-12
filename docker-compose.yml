@@ -250,6 +250,7 @@ services:
         - "9000"
       extra_hosts:
         - "dockerhost:${DOCKER_HOST_IP}"
+        - "localhost:192.168.0.87"
       environment:
         - PHP_IDE_CONFIG=${PHP_IDE_CONFIG}
         - DOCKER_HOST=tcp://docker-in-docker:2376
@@ -358,8 +359,12 @@ services:
       depends_on:
         - php-fpm
       networks:
-        - frontend
-        - backend
+        frontend:
+          aliases:
+            - api-gateway-x3english.test
+        backend:
+          aliases:
+            - api-gateway-x3english.test
 
 ### Blackfire ########################################
     blackfire:
